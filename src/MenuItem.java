@@ -12,5 +12,6 @@ public class MenuItem {
         this.burgerDescription = burgerDescription;
         this.burgerName = burgerName;
         this.price = price;
+        menuItems.add(this);
     }
 }
