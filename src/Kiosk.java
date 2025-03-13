@@ -1,16 +1,16 @@
 import java.util.*;
 
 public class Kiosk {
-  private Scanner scanner = new Scanner(System.in);
+  private final Scanner scanner = new Scanner(System.in);
   private Menu currentMenu = null;
   private MenuItem selectedItem = null;
-  private ShoppingCart shoppingCart = new ShoppingCart();
+  private final ShoppingCart shoppingCart = new ShoppingCart();
 
     public Kiosk() {
         Menu burgerMenu = new Menu("햄버거 메뉴");
         burgerMenu.addMenuItem(new MenuItem("치즈버거", "치즈버거입니다.", 1500));
-        burgerMenu.addMenuItem(new MenuItem("치즈버거", "치즈버거입니다.", 1500));
-        burgerMenu.addMenuItem(new MenuItem("치즈버거", "치즈버거입니다.", 1500));
+        burgerMenu.addMenuItem(new MenuItem("불고기버거", "불고기버거입니다.", 2500));
+        burgerMenu.addMenuItem(new MenuItem("새우버거", "새우버거입니다.", 2000));
         Menu drinkMenu = new Menu("음료수 메뉴");
         drinkMenu.addMenuItem(new MenuItem("콜라", "콬라입니다.", 1500));
         drinkMenu.addMenuItem(new MenuItem("사이다", "사이다입니다.", 1500));
@@ -35,7 +35,7 @@ public class Kiosk {
                 System.out.println("--------------------");
                 System.out.print("메뉴를 골라주세요: ");
 
-                int choice = -1;
+                int choice;
                 try {
                    choice= scanner.nextInt();
                 } catch (InputMismatchException e) {
@@ -75,7 +75,7 @@ public class Kiosk {
                 System.out.println("--------------");
                 System.out.println("메뉴를 골라주세요 :");
 
-                int choice = -1;
+                int choice;
                 try{
                     choice= scanner.nextInt();
                 }catch (InputMismatchException e){
@@ -98,7 +98,7 @@ public class Kiosk {
                     System.out.println("0. 뒤로 가기");
                     System.out.println("입력: " );
 
-                    int action = -1;
+                    int action;
                     try{
                         action = scanner.nextInt();
                     }catch (InputMismatchException e){
