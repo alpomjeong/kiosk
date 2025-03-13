@@ -8,13 +8,6 @@ public class ShoppingCart {
         System.out.println(item.getFoodName() + "가 장바구니에 추가되었습니다.");
     }
 
-    public int calculateTotalPrice(){
-        int total = 0;
-        for(MenuItem item : items) {
-         total += item.getPrice();
-        }
-        return total;
-    }
 
     public boolean isEmpty(){
         return items.isEmpty();
