@@ -1,8 +1,8 @@
 import java.util.*;
 
  class Menu {
-    String foodCategory;
-    List<MenuItem> menuItems;
+    private String foodCategory;
+    private List<MenuItem> menuItems;
     private static List<Menu> menus = new ArrayList<>();
 
     public Menu(String foodCategory){

@@ -1,9 +1,10 @@
 import java.util.*;
 
 public class Kiosk {
-    Scanner scanner = new Scanner(System.in);
-    Menu currentMenu = null;
-    MenuItem selectedItem = null;
+  private Scanner scanner = new Scanner(System.in);
+  private Menu currentMenu = null;
+  private MenuItem selectedItem = null;
+  private ShoppingCart shoppingCart = new ShoppingCart();
 
     public Kiosk() {
         Menu burgerMenu = new Menu("햄버거 메뉴");
@@ -14,7 +15,9 @@ public class Kiosk {
         drinkMenu.addMenuItem(new MenuItem("콜라", "콬라입니다.", 1500));
         drinkMenu.addMenuItem(new MenuItem("사이다", "사이다입니다.", 1500));
         drinkMenu.addMenuItem(new MenuItem("환타", "환타입니다.", 1500));
+
     }
+
 
     public void start() {
 
@@ -27,6 +30,7 @@ public class Kiosk {
                 for (int i = 0; i < menus.size(); i++) {
                     System.out.println((i + 1) + ". " + menus.get(i).getFoodCategory());
                 }
+                System.out.println("9. 장바구니 보기");
                 System.out.println("0 . 종료");
                 System.out.println("--------------------");
                 System.out.print("메뉴를 골라주세요: ");
@@ -41,6 +45,16 @@ public class Kiosk {
                 }
                 if (choice > 0 && choice <= menus.size()) {
                     currentMenu = menus.get(choice - 1);
+                }else if(choice==9){
+                    shoppingCart.showCartItems();
+                    if(!shoppingCart.isEmpty()){
+                        System.out.println("1. 주문 확정");
+                        System.out.println("0. 돌아가기");
+                        int cartChoice = scanner.nextInt();
+                        if(cartChoice==1){
+                            shoppingCart.clearCart();
+                        }
+                    }
                 } else if (choice == 0) {
                     System.out.println("프로그램을 종료합니다.");
                     break;
@@ -80,7 +94,7 @@ public class Kiosk {
             }else if(selectedItem != null)
                 {
                     System.out.println("현재 선택한 메뉴 : " + selectedItem.getFoodName());
-                    System.out.println("1. 선택 확정");
+                    System.out.println("1. 장바구니에 추가");
                     System.out.println("0. 뒤로 가기");
                     System.out.println("입력: " );
 
@@ -92,7 +106,7 @@ public class Kiosk {
                         System.out.println("잘못된 입력입니다. 숫자를 입력해주세요.");
                         continue;
                     }  if (action == 1){
-                    System.out.println(selectedItem.getFoodName() + "로 정하셨습니다.");
+                    shoppingCart.addItemToCart(selectedItem);
                     selectedItem = null;
                 }else if(action == 0){
                     System.out.println(selectedItem.getFoodName() + "선택을 취소하셨습니다.");

@@ -3,9 +3,9 @@ import java.util.List;
 
 public class MenuItem {
 
-   String foodName;
-   int price;
-   String foodDescription;
+  private String foodName;
+  private int price;
+  private String foodDescription;
 
     public MenuItem(String Name, String Description, int price){
         this.foodDescription = Description;
