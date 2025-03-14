@@ -5,7 +5,7 @@ public class Kiosk {
   private Menu currentMenu = null;
   private MenuItem selectedItem = null;
   private final ShoppingCart shoppingCart = new ShoppingCart();
-
+//생성자: 초기 메뉴를 생성하여 메뉴항목을 추가 하게끔 만듬
     public Kiosk() {
         Menu burgerMenu = new Menu("햄버거 메뉴");
         burgerMenu.addMenuItem(new MenuItem("치즈버거", "치즈버거입니다.", 1500));
@@ -18,14 +18,15 @@ public class Kiosk {
 
     }
 
-
+ //키오스크 실행 메서드
     public void start() {
 
 
         while (true) {
+            //사용자가 어떤것도 선택하지 않은 카테고리 선택 초기 화면
             if (selectedItem == null && currentMenu == null) {
                 System.out.println("---- 카테고리 선택 ----");
-
+               //전체 메뉴 목록 가져오기
                 List<Menu> menus = Menu.getMenus();
                 for (int i = 0; i < menus.size(); i++) {
                     System.out.println((i + 1) + ". " + menus.get(i).getFoodCategory());
@@ -34,7 +35,7 @@ public class Kiosk {
                 System.out.println("0 . 종료");
                 System.out.println("--------------------");
                 System.out.print("메뉴를 골라주세요: ");
-
+               // 사용자 입력 처리
                 int choice;
                 try {
                    choice= scanner.nextInt();
@@ -46,16 +47,18 @@ public class Kiosk {
                 if (choice > 0 && choice <= menus.size()) {
                     currentMenu = menus.get(choice - 1);
                 }else if(choice==9){
+                    //장바구니 보기
                     shoppingCart.showCartItems();
                     if(!shoppingCart.isEmpty()){
                         System.out.println("1. 주문 확정");
                         System.out.println("0. 돌아가기");
                         int cartChoice = scanner.nextInt();
                         if(cartChoice==1){
+                            //장바구니 비우기(주문완료 처리)
                             shoppingCart.clearCart();
                         }
                     }
-                } else if (choice == 0) {
+                } else if (choice == 0) {// 프로그램 종료
                     System.out.println("프로그램을 종료합니다.");
                     break;
                 } else {
@@ -63,7 +66,7 @@ public class Kiosk {
                     continue;
                 }
             }
-
+            // 메뉴를 선택하는 부분
             if (selectedItem == null && currentMenu != null){
                 System.out.println("----"+currentMenu.getFoodCategory()+"----");
                 List<MenuItem> items = currentMenu.getMenuItems();
@@ -74,7 +77,7 @@ public class Kiosk {
                 System.out.println("0. 뒤로 가기");
                 System.out.println("--------------");
                 System.out.println("메뉴를 골라주세요 :");
-
+                //입력 처리
                 int choice;
                 try{
                     choice= scanner.nextInt();
@@ -84,20 +87,23 @@ public class Kiosk {
                     continue;
                 }
                 if(choice>0 && choice <= items.size()){
+                    //선택한 메뉴를 저장히는 부분
                     selectedItem = items.get(choice -1);
                     System.out.println(selectedItem.getFoodName() + "를 선택하셨습니다.");
                 }else if(choice == 0){
+                    // 뒤로 가기
                     currentMenu = null;
                 }else{
                     System.out.println("잘못된 입력입니다. 다시 선택해주세요.");
                 }
+                //메뉴를 선택해서 장바구니에 추가할지 말지 고르는 부분
             }else if(selectedItem != null)
                 {
                     System.out.println("현재 선택한 메뉴 : " + selectedItem.getFoodName());
                     System.out.println("1. 장바구니에 추가");
                     System.out.println("0. 뒤로 가기");
                     System.out.println("입력: " );
-
+                    // 입력처리
                     int action;
                     try{
                         action = scanner.nextInt();
